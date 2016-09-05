@@ -51,7 +51,6 @@
 	<modules>
 		<module>clan-members-client</module>
 		<module>clan-members-web</module>
-		<module>clan-members-springboot</module>
 		<module>clan-members-service</module>
 	</modules>
 </project>
