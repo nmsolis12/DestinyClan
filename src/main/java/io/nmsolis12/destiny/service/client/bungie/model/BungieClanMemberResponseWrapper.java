@@ -1,21 +1,23 @@
 package io.nmsolis12.destiny.service.client.bungie.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BungieClanResponseWrapper {
+public class BungieClanMemberResponseWrapper {
 
 	@JsonProperty(value="Response")
-	private BungieClanResponse response;
+	private BungieClanMemberResponse response;
 	
 	@JsonProperty(value="ErrorCode")
 	private String errorCode;
 	
-	public BungieClanResponse getResponse() {
+	public BungieClanMemberResponse getResponse() {
 		return response;
 	}
-	public void setResponse(BungieClanResponse response) {
+	public void setResponse(BungieClanMemberResponse response) {
 		this.response = response;
 	}
 	public String getErrorCode() {

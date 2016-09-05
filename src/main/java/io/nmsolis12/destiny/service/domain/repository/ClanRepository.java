@@ -1,7 +1,10 @@
 package io.nmsolis12.destiny.service.domain.repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,9 +13,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import io.katharsis.queryParams.QueryParams;
+import io.katharsis.repository.annotations.JsonApiFindAll;
 import io.katharsis.repository.annotations.JsonApiFindOne;
 import io.katharsis.repository.annotations.JsonApiResourceRepository;
+import io.nmsolis12.destiny.service.client.bungie.model.BungieClan;
+import io.nmsolis12.destiny.service.client.bungie.model.BungieClanMember;
 import io.nmsolis12.destiny.service.client.bungie.model.BungieClanResponseWrapper;
+import io.nmsolis12.destiny.service.client.bungie.model.BungieDestinyCharacter;
+import io.nmsolis12.destiny.service.dao.BungieRetrieve;
 import io.nmsolis12.destiny.service.domain.model.Account;
 import io.nmsolis12.destiny.service.domain.model.Clan;
 import io.nmsolis12.destiny.service.domain.model.Guardian;
@@ -24,22 +32,37 @@ public class ClanRepository {
 
 	private static final Clan FAKE_CLAN_FOR_TEST = createFakeClan();
 	
+	@Autowired
+	private final BungieRetrieve bungieRetrieve;
+	
+	public ClanRepository(BungieRetrieve bungieRetrieve) {
+		this.bungieRetrieve =bungieRetrieve;
+	}
+	
 	@JsonApiFindOne
 	public Clan findOne(long clanId, QueryParams requestParams){
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("X-API-Key", "33fec0f5d5684ca38be8f2eb079b71da");
+		return null;
+	}
+	
+    @JsonApiFindAll
+    public List<Clan> findAll(QueryParams requestParams) {
+    	// TODO: All of this needs to be refactored into orchestration classes using adapters
+		String clanName = getClanNameParameter(requestParams);
+		BungieClan clan = bungieRetrieve.retrieveClanInformation(clanName);
+		List<BungieClanMember> clanMembers = bungieRetrieve.retrieveClanMembers(clan.getGroupId(), 1);
+		clanMembers.addAll(bungieRetrieve.retrieveClanMembers(clan.getGroupId(), 2));
 		
-		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+		for (BungieClanMember clanMember: clanMembers) {
+			//TODO: Use character summary to get each character's last play date. Then figure the latest play date.
+			List<BungieDestinyCharacter> characters = bungieRetrieve.retrieveDestinyCharacters(clanMember.getMembershipType(), clanMember.getMembershipId());
+			System.out.println(characters.size());
+		}
+		
+		return null;
+    }
 
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<BungieClanResponseWrapper> bungieClanResponse = 
-				restTemplate.exchange("https://www.bungie.net/Platform/Group/Name/DadsOfDestiny Echo/", 
-						HttpMethod.GET, 
-						entity, 
-						BungieClanResponseWrapper.class);
-		
-		Clan newClan = new Clan(Long.parseLong(bungieClanResponse.getBody().getResponse().getDetail().getGroupId()), null);
-		return newClan;
+	private String getClanNameParameter(QueryParams requestParams) {
+		return "DadsOfDestiny Echo";
 	}
 
 	private static Clan createFakeClan() {

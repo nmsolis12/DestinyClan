@@ -4,18 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BungieClanResponseWrapper {
+public class BungieDestinyCharacterResponseWrapper {
 
 	@JsonProperty(value="Response")
-	private BungieClanResponse response;
+	private BungieDestinyCharacterResponse response;
 	
 	@JsonProperty(value="ErrorCode")
 	private String errorCode;
 	
-	public BungieClanResponse getResponse() {
+	public BungieDestinyCharacterResponse getResponse() {
 		return response;
 	}
-	public void setResponse(BungieClanResponse response) {
+	public void setResponse(BungieDestinyCharacterResponse response) {
 		this.response = response;
 	}
 	public String getErrorCode() {
