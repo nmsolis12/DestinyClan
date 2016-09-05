@@ -19,7 +19,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.nmsolis12.destiny</groupId>
-			<artifactId>clan-members-pom</artifactId>
+			<artifactId>clan-members-client</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

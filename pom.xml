@@ -48,17 +48,7 @@
 		</dependency>
 	</dependencies>
 	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 	<modules>
-		
 		<module>clan-members-client</module>
 		<module>clan-members-web</module>
 		<module>clan-members-springboot</module>

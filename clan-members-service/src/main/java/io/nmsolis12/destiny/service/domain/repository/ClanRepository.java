@@ -1,26 +1,19 @@
 package io.nmsolis12.destiny.service.domain.repository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import io.katharsis.queryParams.QueryParams;
 import io.katharsis.repository.annotations.JsonApiFindAll;
 import io.katharsis.repository.annotations.JsonApiFindOne;
 import io.katharsis.repository.annotations.JsonApiResourceRepository;
-import io.nmsolis12.destiny.service.client.bungie.model.BungieClan;
-import io.nmsolis12.destiny.service.client.bungie.model.BungieClanMember;
-import io.nmsolis12.destiny.service.client.bungie.model.BungieClanResponseWrapper;
-import io.nmsolis12.destiny.service.client.bungie.model.BungieDestinyCharacter;
-import io.nmsolis12.destiny.service.dao.BungieRetrieve;
+import io.nmsolis12.destiny.client.bungie.BungieRetrieve;
+import io.nmsolis12.destiny.client.bungie.model.BungieClan;
+import io.nmsolis12.destiny.client.bungie.model.BungieClanMember;
+import io.nmsolis12.destiny.client.bungie.model.BungieDestinyCharacter;
 import io.nmsolis12.destiny.service.domain.model.Account;
 import io.nmsolis12.destiny.service.domain.model.Clan;
 import io.nmsolis12.destiny.service.domain.model.Guardian;
