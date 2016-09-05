@@ -8,6 +8,18 @@
 	</parent>
 	<artifactId>clan-members-springboot</artifactId>
 
+	<dependencies>
+		<dependency>
+			<groupId>io.nmsolis12.destiny</groupId>
+			<artifactId>clan-members-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.nmsolis12.destiny</groupId>
+			<artifactId>clan-members-web</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
